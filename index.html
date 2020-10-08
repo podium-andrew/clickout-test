@@ -4,7 +4,7 @@
 
 <h1>My First Heading</h1>
 
-<p>My first paragraph.</p>
+<p>Checks again after 4 seconds</p>
 
 <input id="clickMe" type="button" value="clickme" onclick="openTab();" />
 
@@ -16,16 +16,27 @@
 const openTab = () => {
   const newTab = window.open("about:blank", "_blank");
   writeToPage(newTab);
+
+  setTimeout(() => {
+    writeToPage(newTab);
+  }, 4000)
 }
 
 function writeToPage(msg) {
+
   const element = document.getElementById("footer");
+
+  const dividingNode = document.createElement("div");
+  const dividingText = "------------------------------";
+  const dividingTextNode = document.createTextNode(dividingText);
+  dividingNode.appendChild(dividingTextNode); 
+  element.appendChild(dividingNode);
 
   for (let key in msg) {
     if (msg.hasOwnProperty(key)) {
-      let node = document.createElement("div");
-      let stringToPrint = key + " -> " + msg[key];
-      let textnode = document.createTextNode(stringToPrint);
+      const node = document.createElement("div");
+      const stringToPrint = key + " -> " + msg[key];
+      const textnode = document.createTextNode(stringToPrint);
       node.appendChild(textnode); 
       element.appendChild(node);
     }
