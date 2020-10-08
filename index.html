@@ -8,15 +8,29 @@
 
 <input id="clickMe" type="button" value="clickme" onclick="openTab();" />
 
+<div id="footer">
+</div>
+
 <script>
 
 const openTab = () => {
-  window.open("https://www.google.com", "_blank");
+  const newTab = window.open("about:blank", "_blank");
+  writeToPage(newTab);
 }
 
-// setTimeout(function(){ 
-//   window.open("https://www.google.com", "_blank"); 
-//   }, 3000);
+function writeToPage(msg) {
+  const element = document.getElementById("footer");
+
+  for (let key in msg) {
+    if (msg.hasOwnProperty(key)) {
+      let node = document.createElement("div");
+      let stringToPrint = key + " -> " + msg[key];
+      let textnode = document.createTextNode(stringToPrint);
+      node.appendChild(textnode); 
+      element.appendChild(node);
+    }
+  }
+}
 
 </script>
 
