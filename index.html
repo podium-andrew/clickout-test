@@ -2,9 +2,14 @@
 <html>
 <body>
 
-<h1>My First Heading</h1>
+<h1>Clickout Test</h1>
 
-<p>Checks again after 4 seconds</p>
+<p>Opens new tab with URL given (can use about:blank) and prints to page newTab object key value pairs. Prints again after time specified.</p>
+
+<label for="url">url:</label>
+<input type="text" id="url" name="url">
+<label for="ms">Time (ms):</label>
+<input type="number" id="ms" name="ms">
 
 <input id="clickMe" type="button" value="clickme" onclick="openTab();" />
 
@@ -14,12 +19,22 @@
 <script>
 
 const openTab = () => {
-  const newTab = window.open("about:blank", "_blank");
+  const url = document.getElementById("url").value;
+  const timeInMs = document.getElementById("ms").value;
+
+  let newTab = null;
+
+  if(!url) {
+    newTab = window.open("about:blank", "_blank");
+  } else{
+    newTab = window.open(url);
+  }
+
   writeToPage(newTab);
 
   setTimeout(() => {
     writeToPage(newTab);
-  }, 4000)
+  }, timeInMs)
 }
 
 function writeToPage(msg) {
